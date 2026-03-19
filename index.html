@@ -156,12 +156,12 @@
         </div>
         <div class="column is-one-third">
           <video autoplay controls muted loop playsinline width="100%" style="border-radius: 6px;">
-            <source src="./static/videos/HANDFUL_Twisting/Video Project 11.mp4" type="video/mp4">
+            <source src="./static/videos/HANDFUL_Twisting/HANDFUL_Twist1.mp4" type="video/mp4">
           </video>
         </div>
         <div class="column is-one-third" >
           <video autoplay controls muted loop playsinline width="100%" style="border-radius: 6px;">
-            <source src="./static/videos/HANDFUL_Pushing/Video Project 18.mp4" type="video/mp4">
+            <source src="./static/videos/HANDFUL_Pushing/HANDFUL_Push1.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -170,12 +170,12 @@
       <div class="columns is-centered">
         <div class="column is-one-third">
           <video autoplay controls muted loop playsinline width="100%" style="border-radius: 6px;">
-            <source src="./static/videos/HANDFUL_Pressing/Video Project 14.mp4" type="video/mp4">
+            <source src="./static/videos/HANDFUL_Pressing/HANDFUL_Press1.mp4" type="video/mp4">
           </video>
         </div>
         <div class="column is-one-third">
           <video autoplay controls muted loop playsinline width="100%" style="border-radius: 6px;">
-            <source src="./static/videos/HANDFUL_Cabinet/Video Project 8.mp4" type="video/mp4">
+            <source src="./static/videos/HANDFUL_Cabinet/HANDFUL_Cabinet1.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -270,10 +270,12 @@
           <b>B. </b>We then use a curriculum-based method to select and train the best grasps for each second-subtask environment,
           removing grasps that perform poorly in the initial, limited randomization stages.
         </p>
+        <p>
           <b>C. </b>Finally, taking the best grasp for each task and its corresponding second-subtask policy, we roll out these policies
           and collect trajectories in each of our grasp + second-subtask environments. Then, to transfer to real, we first fix the position of the       
           second-subtask object and then replay the trajectory whose first block position best matches the current position of the block in the
           real world.
+        </p>
         </div>
       </h2>
     </div>
@@ -281,26 +283,122 @@
 </section>
 
 
-
-
 <section class="section">
   <div class="container is-max-desktop">
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <!-- <h2 class="title is-3">Related Links</h2> -->
-
-        <div class="content has-text-justified">
-          <p>
-            More details coming soon.
-          </p>
-
-        </div>
+    <div class="hero-body">
+      <h2 class="title is-3">Task Suite</h2>
+      <div class="content has-text-justified">
+        <p>
+          We test <b>HANDFUL</b> with <b>HANDFUL-Bench</b> which includes five sequential grasp-conditioned dexterous manipulation tasks
+          where the robot must grasp and hold an object while completing a second subtask. We design the second subtasks to require 
+          different combinations of fingers and in-hand space to complete, therefore motivating our exploration of resource-aware grasping styles.
+        </p>  
+        <p>
+          On the left we show sample rollouts of our tasks in the real world. On the right we show our simulation environments and their 
+          randomization levels. Not pictured are the randomizations to the grasped block (red block) dimensions or 
+          object/robot properties like friction, damping, and mass.
+        </p>
       </div>
-    </div>
-    <!--/ Concurrent Work. -->
 
+      <!-- Task block macro: gray box > padding div > columns -->
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Push</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Pushing/HANDFUL_Push2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Simulation_Setup/Sim_setup_Push.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Grasp the red block, then push the blue block to a target position and rotation 
+          (ghosted blue).
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Press</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Pressing/HANDFUL_Press2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Simulation_Setup/Sim_Setup_Press.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Grasp the red block, then press the button within the beige donut.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Twist</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Twisting/HANDFUL_Twist2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Simulation_Setup/Sim_Setup_Twist.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Grasp the red block, then twist the knob a target number of degrees.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Cabinet</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Cabinet/HANDFUL_Cabinet2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Simulation_Setup/Sim_Setup_Cabinet.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Grasp the red block, then pull the cabinet drawer a target distance.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Two Pick</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Two_Pick/HANDFUL_Two_Pick2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static/videos/HANDFUL_Simulation_Setup/Sim_Setup_Two_Pick.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Grasp the red block, then grasp and pick up the green block.
+        </p>
+      </div>
+
+    </div>
   </div>
 </section>
 
