@@ -406,14 +406,23 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="title is-3">Curriculum Overview</h2>
-      <img src="./static/images/Curriculum Randomizations.png" class="interpolation-image" alt="Interpolate start reference image.">
-      <h2 class="subtitle has-text-centered">
-      <div class="content has-text-justified">
-        <p>
-
-        </p>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="./static/images/Curriculum Randomizations.png" class="interpolation-image" alt="Interpolate start reference image.">
         </div>
-      </h2>
+      </div>
+      <div class="content has-text-justified">
+
+        <p>
+          Each curriculum stage C<sub>0</sub> → C<sub>1</sub> → C<sub>2</sub> progressively increases the 
+          second-task object's position randomization and domain randomizations (mass, friction, etc.). 
+          We intentionally keep early stages simple so that all nine candidate grasps can quickly learn the core 
+          second-subtask strategy. This lets us identify and eliminate poor-performing grasps early before committing 
+          to expensive training under harder conditions. Only the top-performing grasps (and their corresponding 
+          second-subtask policies) survive to each subsequent stage. Note that the first grasped object (red block) has 
+          a fixed ±10cm position randomization during the universal first grasping subtask, which is not depicted here.
+        </p>
+      </div>
     </div>
   </div>
 </section>
