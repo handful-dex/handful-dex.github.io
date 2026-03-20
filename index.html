@@ -28,6 +28,7 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 </head>
 <body>
 <!-- 
@@ -426,6 +427,280 @@
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3">Grasp Types</h2>
+      <p class="mb-5">Explore our resource-aware one and two-finger grasp strategies.</p>
+
+      <div class="columns">
+
+        <!-- Sidebar task list -->
+        <div class="column is-one-quarter">
+          <aside class="menu">
+            <p class="menu-label">Grasp Types</p>
+            <ul class="menu-list" id="task-list">
+              <!-- Populated by JS -->
+            </ul>
+          </aside>
+        </div>
+
+        <!-- Right: pose buttons + viewer -->
+        <div class="column">
+          <div class="buttons is-flex is-flex-wrap-wrap mb-4" id="pose-buttons"></div>
+
+          <model-viewer
+            id="pose-viewer"
+            camera-controls
+            tone-mapping="neutral"
+            camera-orbit="45deg 75deg auto"
+            exposure="0.5"
+            shadow-intensity="0.5"
+            shadow-softness="0.5"
+            style="width: 100%; height: 500px; border-radius: 10px; background: #f5f5f5;"
+          ></model-viewer>
+
+          <p class="has-text-centered mt-3" style="color: #888; font-size: 0.85rem;">
+            Click and drag to rotate · Right-click to pan · Scroll to zoom
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tasks = [
+    {
+      label: "Index Finger Only",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Index_Finger_Only/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Index_Finger_Only/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Index_Finger_Only/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Middle Finger Only",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Middle_Finger_Only/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Middle_Finger_Only/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Middle_Finger_Only/xArm7-v1-pick-randomized_episode_2_final.glb" },
+
+      ]
+    },
+    {
+      label: "Ring Finger Only",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Ring_Finger_Only/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Ring_Finger_Only/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Ring_Finger_Only/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Index + Middle Finger",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Index_Middle_Finger/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Index_Middle_Finger/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Index_Middle_Finger/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Middle + Ring Finger",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Middle_Ring_Finger/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Middle_Ring_Finger/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Middle_Ring_Finger/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Index + Ring Finger",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Index_Ring_Finger/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Index_Ring_Finger/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Index_Ring_Finger/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Index Finger + Thumb",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Index_Finger_Thumb/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Index_Finger_Thumb/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Index_Finger_Thumb/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Middle Finger + Thumb",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Middle_Finger_Thumb/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Middle_Finger_Thumb/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Middle_Finger_Thumb/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+    {
+      label: "Ring Finger + Thumb",
+      poses: [
+        { label: "Pose 1", src: "./static/grasp_models/Ring_Finger_Thumb/xArm7-v1-pick-randomized_episode_0_final.glb" },
+        { label: "Pose 2", src: "./static/grasp_models/Ring_Finger_Thumb/xArm7-v1-pick-randomized_episode_1_final.glb" },
+        { label: "Pose 3", src: "./static/grasp_models/Ring_Finger_Thumb/xArm7-v1-pick-randomized_episode_2_final.glb" },
+      ]
+    },
+  ];
+
+  const viewer = document.getElementById("pose-viewer");
+  const taskList = document.getElementById("task-list");
+  const poseButtons = document.getElementById("pose-buttons");
+
+function loadPose(src, btn) {
+    viewer.setAttribute('src', src);  // was: viewer.src = src
+    poseButtons.querySelectorAll("button").forEach(b => {
+        b.classList.remove("is-dark");
+        b.classList.add("is-light");
+    });
+    btn.classList.remove("is-light");
+    btn.classList.add("is-dark");
+}
+
+  function loadTask(taskIndex, linkEl) {
+    taskList.querySelectorAll("a").forEach(a => a.classList.remove("is-active"));
+    linkEl.classList.add("is-active");
+
+    poseButtons.innerHTML = "";
+    tasks[taskIndex].poses.forEach(({ label, src }, i) => {
+      const btn = document.createElement("button");
+      btn.className = "button is-rounded is-small " + (i === 0 ? "is-dark" : "is-light");
+      btn.textContent = label;
+      btn.onclick = () => loadPose(src, btn);
+      poseButtons.appendChild(btn);
+      if (i === 0) loadPose(src, btn);
+    });
+  }
+
+  tasks.forEach(({ label }, i) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.textContent = label;
+    a.onclick = () => loadTask(i, a);
+    li.appendChild(a);
+    taskList.appendChild(li);
+  });
+
+  // Load first task by default
+  loadTask(0, taskList.querySelector("a"));
+</script>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3">Top Grasp Strategies per Task</h2>
+      <p class="mb-5">
+        The diverse grasp strategies we train allow for diverse second subtask execution. 
+        Explore the top 3 grasp strategies for each task in simulation.
+      </p>
+
+      <div class="columns">
+
+        <!-- Sidebar task list -->
+        <div class="column is-one-quarter">
+          <aside class="menu">
+            <p class="menu-label">Tasks</p>
+            <ul class="menu-list" id="task-list-video"></ul>
+          </aside>
+        </div>
+
+        <!-- Right: strategy buttons + video -->
+        <div class="column">
+
+          <!-- Strategy toggle buttons -->
+          <div class="buttons is-flex is-flex-wrap-wrap mb-3" id="strategy-buttons"></div>
+
+          <!-- Dynamic label showing current strategy name -->
+          <p id="strategy-label" class="has-text-weight-semibold mb-3"></p>
+
+          <!-- Single video -->
+          <video id="strategy-video" autoplay muted loop playsinline width="100%"
+            style="border-radius: 6px; display: none;">
+            <source id="strategy-video-src" src="" type="video/mp4">
+          </video>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 
+<script>
+  const videoTasks = [
+    {
+      label: "Grasp + Push",
+      strategies: [
+        { label: "Strategy 1", description: "Index finger pinch", src: "./static/videos/push/strategy1.mp4" },
+        { label: "Strategy 2", description: "Two-finger wrap",    src: "./static/videos/push/strategy2.mp4" },
+        { label: "Strategy 3", description: "Palm brace",         src: "./static/videos/push/strategy3.mp4" },
+      ]
+    },
+    {
+      label: "Grasp + Press",
+      strategies: [
+        { label: "Strategy 1", description: "Index finger pinch", src: "./static/videos/press/strategy1.mp4" },
+        { label: "Strategy 2", description: "Two-finger wrap",    src: "./static/videos/press/strategy2.mp4" },
+        { label: "Strategy 3", description: "Palm brace",         src: "./static/videos/press/strategy3.mp4" },
+      ]
+    },
+    // ...
+  ];
+
+  const taskListVideo  = document.getElementById("task-list-video");
+  const strategyBtns  = document.getElementById("strategy-buttons");
+  const strategyLabel = document.getElementById("strategy-label");
+  const strategyVideo = document.getElementById("strategy-video");
+  const strategyVideoSrc = document.getElementById("strategy-video-src");
+
+  function loadStrategy(strategy, btn) {
+    // Update active button
+    strategyBtns.querySelectorAll("button").forEach(b => {
+      b.classList.remove("is-dark");
+      b.classList.add("is-light");
+    });
+    btn.classList.remove("is-light");
+    btn.classList.add("is-dark");
+
+    // Update label and video
+    strategyLabel.textContent = `${strategy.label}: ${strategy.description}`;
+    strategyVideoSrc.src = strategy.src;
+    strategyVideo.style.display = "block";
+    strategyVideo.load();
+    strategyVideo.play();
+  }
+
+  function loadVideoTask(taskIndex, linkEl) {
+    taskListVideo.querySelectorAll("a").forEach(a => a.classList.remove("is-active"));
+    linkEl.classList.add("is-active");
+
+    strategyBtns.innerHTML = "";
+    videoTasks[taskIndex].strategies.forEach((strategy, i) => {
+      const btn = document.createElement("button");
+      btn.className = "button is-rounded is-small " + (i === 0 ? "is-dark" : "is-light");
+      btn.textContent = strategy.label;
+      btn.onclick = () => loadStrategy(strategy, btn);
+      strategyBtns.appendChild(btn);
+      if (i === 0) loadStrategy(strategy, btn);
+    });
+  }
+
+  videoTasks.forEach(({ label }, i) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.textContent = label;
+    a.onclick = () => loadVideoTask(i, a);
+    li.appendChild(a);
+    taskListVideo.appendChild(li);
+  });
+
+  loadVideoTask(0, taskListVideo.querySelector("a"));
+</script>
+ -->
 
 <!-- <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
