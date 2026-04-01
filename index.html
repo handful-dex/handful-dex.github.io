@@ -403,7 +403,7 @@
 </section>
 
 
-<section class="section">
+<section class="section is-light"  style="background-color:#f5f5f5;">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="title is-3">Curriculum Overview</h2>
@@ -432,7 +432,10 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="title is-3">Grasp Types</h2>
-      <p class="mb-5">Explore our resource-aware one and two-finger grasp strategies.</p>
+      <p class="mb-5">
+        Explore our resource-aware one and two-finger grasp strategies. Each pose here is from the same grasping
+        seed, but with a different initial start and goal position for the red block.
+      </p>
 
       <div class="columns">
 
@@ -589,8 +592,8 @@ function loadPose(src, btn) {
   // Load first task by default
   loadTask(0, taskList.querySelector("a"));
 </script>
-<!-- 
-<section class="section">
+
+<!-- <section class="section">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="title is-3">Top Grasp Strategies per Task</h2>
@@ -601,7 +604,6 @@ function loadPose(src, btn) {
 
       <div class="columns">
 
-        <!-- Sidebar task list -->
         <div class="column is-one-quarter">
           <aside class="menu">
             <p class="menu-label">Tasks</p>
@@ -609,16 +611,12 @@ function loadPose(src, btn) {
           </aside>
         </div>
 
-        <!-- Right: strategy buttons + video -->
         <div class="column">
 
-          <!-- Strategy toggle buttons -->
           <div class="buttons is-flex is-flex-wrap-wrap mb-3" id="strategy-buttons"></div>
 
-          <!-- Dynamic label showing current strategy name -->
           <p id="strategy-label" class="has-text-weight-semibold mb-3"></p>
 
-          <!-- Single video -->
           <video id="strategy-video" autoplay muted loop playsinline width="100%"
             style="border-radius: 6px; display: none;">
             <source id="strategy-video-src" src="" type="video/mp4">
@@ -746,6 +744,281 @@ function loadPose(src, btn) {
     </div>
   </div>
 </footer> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3">Top Grasp Strategies per Task</h2>
+      <div class="content has-text-justified">
+        <p>
+          Our curriculum selects the top three performing grasp strategies for each second subtask.
+          Below we show the three strategies selected for each task in simulation from one of the curriculum seeds
+          and point out some patterns between the strategies.
+        </p>
+        <p>
+          Notably, because we only train one grasping seed (compared to multiple seeds of our second task policies) it
+          isn't easy to discern how much of each grasp's performance is due to its stability (in grasping the red block)
+          versus its suitability to each task. In particular, in this grasping seed, the "Index Finger Only" and 
+          "Ring Finger + Thumb" grasps perform well on almost all of our tasks which may indicate either their 
+          broad suitability for the task suite or their high stability in this grasping seed (or both). Running more
+          grasping seeds for all of the grasp strategies would likely help alleviate this problem.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Push</h2>
+        <div class="columns">
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src=".\static\videos\HANDFUL_SIM_Rollout\xArm7-v1-push-unified\Index_Middle\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index + Middle Finger</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src=".\static\videos\HANDFUL_SIM_Rollout\xArm7-v1-push-unified\Index_Only\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index Finger Only</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src=".\static\videos\HANDFUL_SIM_Rollout\xArm7-v1-push-unified\Ring_Thumb\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger + Thumb</p>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Push is the easiest task of the five. Still, grasps that allow the index finger and thumb to better 
+          control the rotation of the push block (in blue) seem to do better here.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Press</h2>
+        <div class="columns">
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-press-button-unified\Index_Ring\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index + Ring Finger</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-press-button-unified\Ring_Only\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger Only</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-press-button-unified\Ring_Thumb\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger + Thumb</p>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Press requires precise finger insertion. Grasps that can keep the block to the side or back of the hand reduce
+          collisions between the hand and button guard (in beige).
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Twist</h2>
+        <div class="columns">
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-knob-twist-unified\Index_Only\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index Finger Only</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-knob-twist-unified\Middle_Thumb\1_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Middle Finger + Thumb</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-knob-twist-unified\Ring_Thumb\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger + Thumb</p>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Twist demands sustained rotational contact and strong control over the block. Here we see highly stable graps that leave
+          more of the non-thumb fingers free succeed.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Cabinet</h2>
+        <div class="columns">
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-cabinet-drawer-unified\Index_Only\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index Finger Only</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-cabinet-drawer-unified\Index_Ring\1_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index + Ring Finger</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-cabinet-drawer-unified\Ring_Thumb\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger + Thumb</p>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Cabinet pulling requires hooking into the drawer handle while maintaining the 
+          initial grasp. Similar to press, this favors strategies that keep the block further back in the hand.
+
+          Notably, the "index finger only" grasp here hooks the cabinet with the motor geometry on the knuckle
+          of the hand which makes for a successful strategy, but one that is difficult to transfer to real.
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Two Pick</h2>
+        <div class="columns">
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-two-pick-unified\Index_Only\1_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Index Finger Only</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-two-pick-unified\Middle_Thumb\0_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Middle Finger + Thumb</p>
+          </div>
+          <div class="column">
+            <video autoplay muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_SIM_Rollout\xArm7-v1-two-pick-unified\Ring_Thumb\1_slow.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered mt-2 has-text-weight-semibold">Ring Finger + Thumb</p>
+          </div>
+        </div>
+        <p class="has-text-justified">
+          Two Pick is the most resource-intensive task, requiring grasps with
+          substantial in hand space and multiple free fingers to succeed.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3">Comparison with Demonstration-Based Methods</h2>
+      <div class="content has-text-justified">
+        <p>
+          A natural question is whether demonstration-based methods, such as imitation learning and its variants, 
+          could replace our curriculum-based RL method. In practice, these methods are bounded by the diversity 
+          and volume of collected demonstrations which may not fully exhibit the capabilities of robot hands.
+        </p>  
+      </div>
+
+      <!-- Task block macro: gray box > padding div > columns -->
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Push</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\Baselines_Push\Baselines_Push1.MOV" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_Pushing\HANDFUL_Push3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Press</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\Baselines_Press\Baselines_Press1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_Pressing\HANDFUL_Press3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Twist</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\Baselines_Twisting\Baselines_Twist1.MOV" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_Twisting\HANDFUL_Twist3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Cabinet</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\Baselines_Cabinet\Baselines_Cabinet1.MOV" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_Cabinet\HANDFUL_Cabinet3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+        </p>
+      </div>
+
+      <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
+        <h2 class="title is-4" style="margin-bottom:0.75rem;">Grasp + Two Pick</h2>
+        <div class="columns">
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\Baselines_Two_Pick\Baselines_Two_Pick3.MOV" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay controls muted loop playsinline width="100%" style="border-radius:6px;">
+              <source src="./static\videos\HANDFUL_Two_Pick\HANDFUL_Two_Pick3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p class="has-text-justified">
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
